@@ -1,0 +1,106 @@
+<template>
+  <div class="countdown-container">
+    <div>打榜火热进行中…</div>
+    <div>
+      直播颁奖倒计时:
+      <div class="countdown-time">{{ time.day }}</div>天
+      <div class="countdown-time">{{ filterTime(time.hour) }}</div>小时
+      <div class="countdown-time">{{ filterTime(time.minute) }}</div>分
+      <div class="countdown-time">{{ filterTime(time.second) }}</div>秒
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { reactive,toRefs } from "vue"; // @ is an alias to /src
+export default {
+  setup() {
+    const state = reactive({
+      time: {
+        day: 0,
+        hour: 20,
+        minute: 49,
+        second: 50,
+      },
+    });
+    // 这里是有问题的
+    const computedTime = () => {
+      state.time.second--;
+      if (state.time.second <= 0) {
+        state.time.second = 60;
+        state.time.minute--;
+        if (state.time.minute <= 0) {
+          state.time.minute = 60;
+          state.time.hour--;
+          if (state.time.hour <= 0) {
+            state.time.hour = 24;
+            state.time.day--;
+            if (state.time.day <= 0) {
+              state.time.day = 0;
+            }
+          }
+        }
+      }
+      return setTimeout(computedTime, 1000);
+    };
+    // 如果等于0，则补一个0
+    const filterTime = (v:number):string => v === 0 ? '00' : `${v}`;
+    computedTime();
+    const refState = toRefs(state)
+    return {
+      ...refState,
+      filterTime
+    };
+  },
+};
+</script>
+
+<style lang="less">
+.countdown-container {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArIAAACMCAMAAAC3SLpGAAAAaVBMVEUQGz8QGz8AAAAQGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz94dPQQGz9VVrh2cvFLTqZoZtlxbug/Q5ItNHESHUNgX8pcXMRHSp80On4iKl4hKl0XIUpSVLK1w407AAAAEXRSTlOA1QD8ibYI4Mn36KyjlpFbVDznBesAAAKISURBVHja7NZRSusAFEXRYEra90Ahl6QfRdD5j1IsDqIb1hrD5nCWt1/bx3UdeGH/rh/bM9Znshe9ErBe/pLdbjPf5/3Y4WUd9/N75rY9k73N49QrL+84H3P7TfYyj88dAj4fc3lbtnXOHRLOWbflfb68AiKOr3lfrkaWjnP+L+vcd4i4z7rM+AVkHDPLzA4ZkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiRLjGSJkSwxkiVGssRIlhjJEiNZYiT70469pSgMhEEU/u1O565JakANouDsf5FDMpvogvOt4TwUBTMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzMkCzNnso8NMPE4k31tgInXmexzA0w8z2S/LAOYeHzPZPXZAAsfSTFoYBrAw1ODhrioZO33DajcfVcu6mJSmQdpf/8A9fp979IwF02xaIymzwIql/smRi3RdioRzdRfgIr1UxNRNLaRVuU5AANz1poipUa5BFC9ktWkI9l0k8ZyC6BezbWM0jX9J5vWTkD1ujWdyR7aZeo4DVCx3E1Lmw5/9Xht8tbwmJYAAAAASUVORK5CYII=");
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  height: 70px;
+  background-size: contain;
+  line-height: 25px;
+  text-align: center;
+  padding: 3.25px;
+  flex-flow: column nowrap;
+  align-items: center;
+  box-sizing: border-box;
+  .countdown-time {
+    color: gold;
+    font-size: 18px;
+    font-weight: 600;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAAAzCAMAAAD2KDXHAAAAolBMVEUQGz8AAAAQGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz8QGz9IRLgQGz8jKWc9PKAuMX8aIlRGQrQxM4gRHEI6OpoeJV0WH0xDQK42N5MgJ2QbI1cVHko/PqYqLncTHUcnLHHfF/l8AAAAIXRSTlNUAMctG+r1RyHuw7uZfXFNNzQBxbSoh4ZaT0AQDgzg2Z6db6m2AAABGklEQVRIx+3XyVaDUBBF0cLQJaGNMX1ULiJtaJL4/78mT8LSKa9Yjjjz2uO6pDw6ensa2MHsjztlRc+Q6dU+/Spma6R1FQ4sbwBt1yveHEUSBxJlOWB3iqmhEoZUCbD7UZaoAvkS6GarGGguAaMQ763ygijgdIV+ptUc14BVDYNU3ANeX3Bohk+mEmE7irIZRbHIH0FZkzuCsiAaQXmalEmZlEmZlH9WXBRM5YYF+UhjnhJiTTOgZCHxHZZQcpaSABuhIGEglwbYkgogzeSRGoBDylwwUSyHZAXaDPHXiYpbmX0MrIxyiPQzKQdws7p/l5euCkXVwIq6HeCzGKffJOoCsmnu3320TCHRm31UOuXRaWbQsPae2h9/A+lEpvxOn489AAAAAElFTkSuQmCC);
+    height: 26px;
+    width: 35px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+  }
+}
+@media only screen and(min-width:960px) {
+  .countdown-container {
+    position: absolute;
+    top: 233px;
+    font-size: 24px;
+    background-image: unset;
+    text-align: left;
+    padding: 0;
+    line-height: 28px;
+    align-items: start;
+    .countdown-time {
+      font-size: 36px;
+      width: 60px;
+      height: 44px;
+      line-height: 42px;
+    }
+  }
+}
+</style>

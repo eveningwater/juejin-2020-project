@@ -1,0 +1,16 @@
+{
+  "name": "juejin-web-background",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "art-template": "^4.13.2",
+    "express": "^4.17.1",
+    "superagent": "^6.1.0"
+  }
+}
