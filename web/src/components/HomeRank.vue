@@ -84,10 +84,14 @@
         </div>
       </div>
     </div>
+    <LeftWeChat />
+    <RightDownLoad />
   </div>
 </template>
 
 <script lang="ts">
+import LeftWeChat from "./LeftWeChat.vue";
+import RightDownLoad from "./RightDownLoad.vue";
 import { computed,onMounted,PropType, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import UserInfoType from "../utils/type";
@@ -104,6 +108,10 @@ interface PropListType {
   listData?: listDataType;
 }
 export default {
+  components:{
+    LeftWeChat,
+    RightDownLoad
+  },
   props: {
     listData: Array as PropType<listDataType>,
   },

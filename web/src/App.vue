@@ -48,6 +48,7 @@ li {
 body {
   line-height: 1.5;
   font-size: 14px;
+  overflow-x: hidden;
   button,
   input {
     overflow: visible;

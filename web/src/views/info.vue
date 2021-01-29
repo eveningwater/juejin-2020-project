@@ -36,6 +36,8 @@
             </div>
           </div>
         </div>
+        <LeftWeChat />
+        <RightDownLoad />
       </div>
     </div>
   </div>
@@ -44,9 +46,13 @@
 <script lang="ts">
 import { reactive, toRefs } from "vue";
 import Header from "../components/Header.vue";
+import LeftWeChat from "../components/LeftWeChat.vue";
+import RightDownLoad from "../components/RightDownLoad.vue";
 export default {
   components: {
     Header,
+    LeftWeChat,
+    RightDownLoad
   },
   setup() {
     const state = reactive({
