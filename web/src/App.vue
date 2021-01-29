@@ -47,6 +47,7 @@ li {
 }
 body {
   line-height: 1.5;
+  font-size: 14px;
   button,
   input {
     overflow: visible;

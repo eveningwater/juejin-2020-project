@@ -69,6 +69,7 @@ export default {
     });
     emitter.on("on-tab-change", (value) => {
       params.cursor = "0";
+      params.keyword = "";
       params["list_type"] = value;
       onSearchResult(params);
     });
