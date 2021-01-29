@@ -62,18 +62,14 @@ export default {
       axios.post("http://localhost:8081/list", params).then((res) => {
         if (res.data.code === 200) {
           if(!res.data.data.length)return;
-          // 如果输入了关键字，则是搜索
-          if(params.keyword){
-            state.listData = res.data.data;
-          }else{
-            state.listData = state.listData.concat(res.data.data);
-          }
+          state.listData = state.listData.concat(res.data.data);
         }
       });
     };
     emitter.on("on-search", (value) => {
       params.keyword = value;
       params.cursor = "0";
+      state.listData = [];
       onSearchResult(params);
     });
     emitter.on("on-tab-change", (value) => {
@@ -96,7 +92,7 @@ export default {
     const scrollHandler = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement || document.body;
-      if (scrollTop + clientHeight >= scrollHeight - 75 && !params.keyword) {
+      if (scrollTop + clientHeight >= scrollHeight - 5) {
         showLoading();
       }
     };
