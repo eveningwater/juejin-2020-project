@@ -15,7 +15,7 @@
           <div
             class="rank-card-item-level"
             :style="
-              card.rank >= 1 && card.rank <= 3
+              card.rank >= 1 && card.rank < 3
                 ? {
                     'background-position': '0px 0px',
                     'background-size': '100%',

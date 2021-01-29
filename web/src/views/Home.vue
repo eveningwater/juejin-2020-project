@@ -26,7 +26,7 @@ import HomeSearch, { emitter } from "../components/HomeSearch.vue";
 import HomeRankButton from "../components/HomeRankButton.vue";
 import HomeRank from "../components/HomeRank.vue";
 import axios from "axios";
-import { onMounted, reactive, toRefs, nextTick,watch } from "vue";
+import { onMounted, reactive, toRefs, nextTick } from "vue";
 import { debounce } from "../utils/debounceFunction";
 interface SearchParams {
   'annual_id'?: string;
@@ -59,6 +59,7 @@ export default {
       axios.post("http://localhost:8081/list", params).then((res) => {
         if (res.data.code === 200) {
           if(!res.data.data.length)return;
+          // 如果输入了关键字，则是搜索
           if(params.keyword){
             state.listData = res.data.data;
           }else{
@@ -76,6 +77,7 @@ export default {
       params.cursor = "0";
       params.keyword = "";
       params["list_type"] = value;
+      state.listData = [];
       onSearchResult(params);
     });
     const showLoading = () => {
@@ -96,7 +98,7 @@ export default {
       }
     };
     onMounted(() => {
-      onSearchResult(params);
+      onSearchResult(JSON.parse(JSON.stringify(params)));
       nextTick(() => {
         window.addEventListener("scroll", debounce(scrollHandler,20));
       });

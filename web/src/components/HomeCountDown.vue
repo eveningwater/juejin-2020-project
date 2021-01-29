@@ -12,44 +12,64 @@
 </template>
 
 <script lang="ts">
-import { reactive,toRefs } from "vue"; // @ is an alias to /src
+import { reactive, toRefs } from "vue"; // @ is an alias to /src
 export default {
   setup() {
+    const endTime = 1611910800000;
+    const startTime = 1611306000000;
     const state = reactive({
       time: {
         day: 0,
-        hour: 20,
-        minute: 49,
-        second: 50,
+        hour: 0,
+        minute: 0,
+        second: 0,
       },
     });
-    // 这里是有问题的
+    const formatTime = (time:number) => {
+      return [
+        Math.floor(time / 1000 / 60 / 60 / 24),
+        Math.floor((time / 1000 / 60 / 60) % 24),
+        Math.floor((time / 1000 / 60) % 60),
+        Math.floor((time / 1000) % 60)
+      ];
+    };
+    let timer:any = null;
     const computedTime = () => {
-      state.time.second--;
-      if (state.time.second <= 0) {
-        state.time.second = 60;
-        state.time.minute--;
-        if (state.time.minute <= 0) {
-          state.time.minute = 60;
-          state.time.hour--;
-          if (state.time.hour <= 0) {
-            state.time.hour = 24;
-            state.time.day--;
-            if (state.time.day <= 0) {
-              state.time.day = 0;
-            }
-          }
-        }
+      const start = new Date(startTime).getTime();
+      const end = new Date(endTime).getTime();
+      const nowTime = new Date().getTime();
+      const startDiff = start - nowTime;
+      const endDiff = end - nowTime;
+      let time:any = null;
+      let bool = false;
+      if(startDiff >= 0){
+        time = formatTime(startDiff);
+      }else if(endDiff >= 0){
+        time = formatTime(endDiff);
+      }else{
+        bool = true;
       }
-      return setTimeout(computedTime, 1000);
+      if(!bool){
+        state.time.day = time[0];
+        state.time.hour = time[1];
+        state.time.minute = time[2];
+        state.time.second = time[3];
+        return timer = setTimeout(computedTime, 1000);
+      }else{
+        state.time.day = 0;
+        state.time.hour = 0;
+        state.time.minute = 0;
+        state.time.second = 0;
+        if(timer)clearTimeout(timer);
+      }
     };
     // 如果等于0，则补一个0
-    const filterTime = (v:number):string => v === 0 ? '00' : `${v}`;
+    const filterTime = (v: number): string => (v < 10 ? "0" + v : `${v}`);
     computedTime();
-    const refState = toRefs(state)
+    const refState = toRefs(state);
     return {
       ...refState,
-      filterTime
+      filterTime,
     };
   },
 };
