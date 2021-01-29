@@ -2,31 +2,33 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    annualUserInfo: null,
-    liveUrl: "",
+    infoData: {
+      'live_time':0
+    },
     isLogin: false,
+    isActivityEnd:false
   },
   mutations: {
-    setVote(state, vote) {
-      state.annualUserInfo = vote;
-    },
-    setLiveUrl(state, url) {
-      state.liveUrl = url;
+    setInfoData(state,value){
+      state.infoData = value;
     },
     setLoginState(state, value) {
       state.isLogin = value;
     },
+    onActivityEnd(state,value){
+      state.isActivityEnd = value;
+    }
   },
   actions: {
-    setVote({ commit }, vote) {
-      commit("setVote", vote);
-    },
-    setLiveUrl({ commit }, url) {
-      commit("setLiveUrl", url);
+    setInfoData({commit},value){
+      commit('setInfoData',value);
     },
     setLoginState({ commit }, value) {
       commit("setLoginState", value);
     },
+    onActivityEnd({commit},value){
+      commit('onActivityEnd',value);
+    }
   },
   modules: {},
 });

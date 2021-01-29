@@ -21,7 +21,7 @@
                     'background-size': '100%',
                     'margin-top': isApp ? '7px' : '11px',
                     'margin-bottom': '0px',
-                    'height': isApp ? '117px' : '153.5px',
+                    height: isApp ? '117px' : '153.5px',
                     'background-image':
                       'url(' +
                       require('../assets/avatar_background_' +
@@ -64,23 +64,30 @@
                 : ""
             }}
           </div>
-          <div class="card-vote">
+          <div class="card-vote" v-if="!isActivityEnd">
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEoAAAA8CAYAAADBqyytAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABWhJREFUeNrsm3tMU1cYwHvhlhZoKUXKQ4sBWQlGyuQRkGwxWwZOXcyyGRenC8uWmUiM2eYjm3/s9RdbpnMJWdgrW0amLjPOLEanFrNlyQYaHhtqJFSEYAtShFJapC/afV93u1w7aO+Fenux5yTfObeXy+U7v/txzvfopfx+v4S0yC2BIODW6MXeQK19YkkDsJp+IxYVzUaFW6PAWuphWAeyFiTpIWXgBvkLpB2sq4UXKACkgeEDkKo4M5wrIO8BsDGua9T7CGlFboF825bd2sL8EiWdSD+U/6beWa+vf/Ca/eSZz03mkYEqZu57IloUWNOLMOxfnpMvO9hwtFguT6HjwZScznvej5vf7B2+M+iCj0fAqk5EWswfw+75zbtWxAskbDhXnDObQSRQZdgVFZaq4m1nY825jAsoGXZSOinuXAfWnGXEjyIhDAFFQBFQJHvAIyq33XWNjt2eEXIy2Zq8ZLUqUyYUKAwQ1/YPXp9KTVHSmRm5cpqW8ra8XmOXreXkkdtCgqrftj+vpnJDFu8wxuvx3Z0YcU7fs3tZDCKCakdQh5v3GQMX0FJqta5cUVOxYdmja2oyEhISKZ56/C4Qp/V8Lvb5Zv1/X2+b+LPjwnjvzW4HwPKHMAgPCmKcr5lkHHqnarhB0dUbl+0o2Rrt8M6tb6zUFej5eO25YltvjANXbcdOfTo0OmZys0734fRBupEBpzWKfSFAwzzUJhS4ceXRLw7e3FJXn73pqR1ajnrpxATpl0vHTWcMLaNMMqADT6HAnN3hfo/iU1wAaIdg2IrHG5/crnl24ysr57t2ZsbhnXJMeoSEkKZIlyYnK+bdoH4+/+3Q+V9/COaaTjV/dKFx+05uaz/FtwoDsEph+AaPX37hQN66irosyRJo7Z0Gy3c/Hg5uLq8CpB484AqK924GJop/AC1Lcvx0kwndALFDQh1PnG4yMx8PBSE9cIcTYBlgOOvxuPznWr8fFjso1NHtcflQZ4BkENoz/wy7tk6D1TFt84gVEuqGOrJ1FhQUWJUFhtbZWa8fXAerWEFd671iRR1RV7AmS6xCmFaQWvBLHKEesR12vIlJi1NIKBnpWXIl7Hzsc323ehzM4aVYxnoD2JlHBpxzPUkxhDAs3W7FElTgX27KYQ23RnUJxKl8rpN2hzUYv02SNMsSSLOo//WI1VK+T1qoplSoafCj0OLTQcZjBaoAO6woh/6gpLhK/fbepmShF/PQc6jbkNk4w+jaHytQtYGot0Cv+P+TTJeG7kCxaKhbW8dFK6Nrq+BrFMR8uLvUJibSlH51tVqsawvqhjqirg1vPZ0lOCgJ80WGmoo6tSJVJRUrKNQNdWTrLBgosKY6GJ6RSmXU5tqXlot9x0IdUVfUGayqThBQTJqlEY93PLdX+6CS+dFsqCPqynxsBFilfO9BEnfRStyxU8EglRRFSbikgmGnsYixCrPQVDA9D5zXJExxAaQoeD5bo01aQHHBKJQnwOUifMCPrNIrmeJCJT58kHdgzvyKCwyk3f9dsPhy1YiYQDG+lerdfV+WYLmqrfPi+A1jF5arggZRjVWoUFhzWRR+C1hyoOETXWpqGp2pzllQAZTV1ktE2PCBl+kfX4YSKIBa7zinp6e8TD0TGUQEhV+VlhTmr0lbjCLFunLV67s+FPQr11hSX1B4AoaQo8lLkWjuZxDNECbslrwUXAeSZiGgCCgCioCKc1CBErnH6/bFGwzWnF1cQHVj19ffY4s3UKw5d3MB9Qd2P537yowv0sQLJJwrzpnNIGL2AGIdrNFXx+FraFgsvQxx3h6uoMiLjVxAsYCRV2W5gOIU05G31EmLqkURz5y0+9o/AgwAZQxMBOI25GkAAAAASUVORK5CYII="
               alt="图片加载中"
             />
-            当前票数：{{ card.vote_cnt > 0 ? card.vote_cnt + '票' : '直播时公布' }}
+            当前票数：{{
+              card.vote_cnt > 0 ? card.vote_cnt + "票" : "直播时公布"
+            }}
             <span class="card-vote-plus-one"></span>
           </div>
         </div>
         <span class="rank-card-item-index">{{
           card.rank >= 10 ? card.rank : "0" + card.rank
         }}</span>
-        <div class="rank-card-item-button-group">
+        <div class="rank-card-item-button-group" v-if="!isActivityEnd">
           <button type="button" @click="onPullTicket">帮Ta拉票</button>
           <button type="button" @click="onSendTicket(card.vote_cnt)">
             给Ta投票
           </button>
+        </div>
+        <div class="rank-card-item-final-button" v-else :style="{
+          'color':card.rank === 1 ? '#fc676a' : card.rank === 2 ? '#f0980e' : card.rank === 3 ? '#1edfd8' : ''
+        }">
+          最终票数：{{ card.vote_cnt }}
         </div>
       </div>
     </div>
@@ -92,7 +99,7 @@
 <script lang="ts">
 import LeftWeChat from "./LeftWeChat.vue";
 import RightDownLoad from "./RightDownLoad.vue";
-import { computed,onMounted,PropType, reactive, toRefs } from "vue";
+import { computed, onMounted, PropType, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import UserInfoType from "../utils/type";
 interface ListItem {
@@ -108,19 +115,19 @@ interface PropListType {
   listData?: listDataType;
 }
 export default {
-  components:{
+  components: {
     LeftWeChat,
-    RightDownLoad
+    RightDownLoad,
   },
   props: {
     listData: Array as PropType<listDataType>,
   },
   setup(props: PropListType) {
     const store = useStore();
-    const liveUrl = computed(() => store.state.liveUrl);
+    const isActivityEnd = computed(() => store.state.isActivityEnd);
     const state = reactive({
       listData: props.listData,
-      isApp:false
+      isApp: false,
     });
     // console.log('列表数据',state.listData);
     const onPullTicket = () => {
@@ -128,27 +135,27 @@ export default {
     };
     const onSendTicket = (value: number) => {
       const isLogin = store.state.isLogin;
-      if(!isLogin){
-        return location.href = "https://juejin.cn/login";
-      }else{
-        alert('开发中...')
+      if (!isLogin) {
+        return (location.href = "https://juejin.cn/login");
+      } else {
+        alert("开发中...");
       }
     };
     const setIsApp = () => {
       state.isApp = window.innerWidth < 960;
-    }
+    };
     const resizeHandler = () => {
       setIsApp();
-    }
+    };
     onMounted(() => {
       setIsApp();
-      window.addEventListener('resize',resizeHandler,false);
-    })
+      window.addEventListener("resize", resizeHandler, false);
+    });
     return {
-      liveUrl,
       ...toRefs(state),
       onPullTicket,
       onSendTicket,
+      isActivityEnd,
     };
   },
 };
@@ -232,6 +239,20 @@ export default {
           }
         }
       }
+      .rank-card-item-final-button {
+        position: absolute;
+        top: 126px;
+        left: 136px;
+        color: #fff;
+        padding: 5px 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhYAAABRCAYAAACOhe8uAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABKZJREFUeNrs3F9olWUcwPHn7J87m/vH8l9OaZb2BxKDEIa7kEzSm8Ir7wIvDKSbEBnYTdetqyC86M66iTKI/kiQoaU0DIooEy1kUUcnpm3TqdvZzlnPs/bqSefawrt9PvA7z/uene3iufryvu9Zbnv3yTCbvv6e2rhsjbMlzvo47XFaAgCwEAzFuRznhzhfpunq7C0dPr5xxg/n7hUWMSjq4vJKnL1xltlXACAqxHkjzoHBwrGJOYVFjIoNcXkvzqPZezVV+dBQ92BYVNMSqnK1thUAFoDSZDEUJ4bD9eL5UCqPVf7oxzg7Y1ycmTUsYlQ8F5cP4zSm8+b6NWFl6+bQkl8XcqHKDgPAAjQ5WQqDN8+E80NHw8jY79nb6TbJ8zEujs8YFjEq0g2To3Ea0lWJzvYdYWnT03YTAMgSI1y8+k347a9Pp2IjGo7THePiVDqpqoiK5rh8kEXFE8t3iwoA4A65sLx5U3hs2a6Qy1WnN9IXOg61dWyu/1dYRK/FWZ0OHlmyMzTVP2TvAIAZtebXhTXtO7LT9Ezmvlth0dffk75Cuicdtzc+GWe9HQMAZrW0aWNoya/NTve2dWxuzK5Y7IyTTwcdrc/aKQBgTjpat2SHbXFeyMJiW3rJ1y4JDXUr7BIAMCfN9Z2htropO92WhUX6vxWVlzMAAOYgF1pv98OGLCw60kt97QP2BwCYl4p+WFnV19+zeCo3QnqSs9ruAADzkrvdD9XpioWaAADuC/+jGwAQFgCAsAAAhAUAgLAAAIQFACAsAABhAQAgLAAAYQEACAsAAGEBAAgLAEBYAADCAgBAWAAAwgIAEBYAAMICABAWAICwAACEBQCAsAAAhAUAICwAAIQFACAsAABhAQAICwAAYQEACAsAQFgAAAgLAEBYAADCAgAQFgAAwgIAEBYAgLAAABAWAICwAACEBQAgLAAAhAUAICwAAGEBACAsAABhAQAICwBAWAAACAsAQFgAAMICABAWtgAAuJ9hcc02AAD/3+TtsOjq7C3HdSidFEtX7Q0AMC8V/XAluxXyU3oZGfvD7gAA8zIyVsgOT2Vh8Vl6GR49FybKN+wQADAnYxNDlRcmDmdh8VF6mZwshYHhE3YJAJiTgeGvw/QzFunRik+mwqKrs/dsXD5PxxeGvwqj41fsFAAwq+vFgXDxWl92+v5g4diFyq+b7otTLE+Oh7OXDoaJ8k07BgDMaLw0En659M7U3Y7UGHH2p4NbYdHV2ftzXF5OxzeKF8OpCwdcuQAA7vJPJ7yVdUK6D7JrsHDst3RSvXb17lsfXNW29fvC0BcN8XDTRPl6+HPku5BumSxetCrkctV2EgAWsFK5GApDR8K5y4fCeHkke/vVGBVvZye57d0n7/rFvv6ePXF5M05tOq+pyoe2hsdD46KOUFfdEs/r7S4ALADp0YhiaXjqmx+DN05PxcW00Tgvxah4t/LzM4bFdFw8FZfX42y1rQBAhY/j7I9RcfrOH9wzLCoCozsuL8Z5Js7D9hIAFpz0HMWvcY7EOdjV2fvt4eMbZ/xgzX/9pfjL6R9bnJiOjHxcVthfAFhQUTEQe2B0Lh/+W4ABAIwBHTBIbtT8AAAAAElFTkSuQmCC);
+      }
       .rank-card-item-button-group {
         position: absolute;
         top: 116px;
@@ -300,6 +321,13 @@ export default {
               margin-left: 10px;
             }
           }
+        }
+        .rank-card-item-final-button {
+          position: absolute;
+          top: 157px;
+          left: 173px;
+          padding: 10px 40px;
+          font-size: 15px;
         }
         .rank-card-item-userinfo {
           font-size: 16px;

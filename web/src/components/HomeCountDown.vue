@@ -1,22 +1,37 @@
 <template>
   <div class="countdown-container">
-    <div>打榜火热进行中…</div>
+    <div :style="'margin-bottom:' + (isActivityEnd ? '10px' : '')">{{ isActivityEnd ? '活动已结束' : '打榜火热进行中…'}}</div>
     <div>
-      直播颁奖倒计时:
-      <div class="countdown-time">{{ time.day }}</div>天
-      <div class="countdown-time">{{ filterTime(time.hour) }}</div>小时
-      <div class="countdown-time">{{ filterTime(time.minute) }}</div>分
-      <div class="countdown-time">{{ filterTime(time.second) }}</div>秒
+      <template v-if="isActivityEnd">活动时间：2021年1月23日 ～ 1月29日</template>
+      <template v-else>
+        直播颁奖倒计时:
+        <div class="countdown-time">{{ time.day }}</div>天
+        <div class="countdown-time">{{ filterTime(time.hour) }}</div>小时
+        <div class="countdown-time">{{ filterTime(time.minute) }}</div>分
+        <div class="countdown-time">{{ filterTime(time.second) }}</div>秒
+      </template>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { reactive, toRefs } from "vue"; // @ is an alias to /src
+import { computed, reactive, toRefs, watch } from "vue"; // @ is an alias to /src
+import { useStore } from 'vuex';
+import { filterTime } from '../utils/date'
 export default {
   setup() {
-    const endTime = 1611910800000;
-    const startTime = 1611306000000;
+    let endTime = 1611910800000;
+    let startTime = 1611306000000;
+    const store = useStore();
+    const infoData = computed(() => store.state.infoData);
+    watch(infoData,(val) => {
+      if(val['start_time']){
+        startTime = val['start_time'];
+      }
+      if(val['end_time']){
+        endTime = val['end_time'];
+      }
+    })
     const state = reactive({
       time: {
         day: 0,
@@ -25,6 +40,7 @@ export default {
         second: 0,
       },
     });
+    const isActivityEnd = computed(() => store.state.isActivityEnd);
     const formatTime = (time:number) => {
       return [
         Math.floor(time / 1000 / 60 / 60 / 24),
@@ -63,13 +79,12 @@ export default {
         if(timer)clearTimeout(timer);
       }
     };
-    // 如果等于0，则补一个0
-    const filterTime = (v: number): string => (v < 10 ? "0" + v : `${v}`);
     computedTime();
     const refState = toRefs(state);
     return {
       ...refState,
       filterTime,
+      isActivityEnd
     };
   },
 };

@@ -30,6 +30,7 @@ import MainLive from "../components/MainLive.vue";
 import axios from "axios";
 import { onMounted, reactive, toRefs, nextTick } from "vue";
 import { debounce } from "../utils/debounceFunction";
+import { useRoute } from "vue-router";
 interface SearchParams {
   'annual_id'?: string;
   'list_type'?: number;
@@ -45,7 +46,7 @@ export default {
     HomeSearch,
     HomeRankButton,
     HomeRank,
-    MainLive
+    MainLive,
   },
   setup() {
     const params = {
@@ -61,7 +62,7 @@ export default {
     const onSearchResult = (params: SearchParams) => {
       axios.post("http://localhost:8081/list", params).then((res) => {
         if (res.data.code === 200) {
-          if(!res.data.data.length)return;
+          if (!res.data.data.length) return;
           state.listData = state.listData.concat(res.data.data);
         }
       });
@@ -84,12 +85,14 @@ export default {
       setTimeout(() => {
         state.LoadingNum = 0;
         setTimeout(() => {
-          params.cursor = (Number(params.cursor) + 20) + "";
+          params.cursor = Number(params.cursor) + 20 + "";
           onSearchResult(params);
         }, 100);
       }, 1000);
     };
+    const route = useRoute();
     const scrollHandler = () => {
+      if(route.path !== "/")return;
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement || document.body;
       if (scrollTop + clientHeight >= scrollHeight - 5) {
@@ -99,7 +102,7 @@ export default {
     onMounted(() => {
       onSearchResult(JSON.parse(JSON.stringify(params)));
       nextTick(() => {
-        window.addEventListener("scroll", debounce(scrollHandler,20));
+        window.addEventListener("scroll", debounce(scrollHandler, 20));
       });
     });
     return {
@@ -141,7 +144,7 @@ export default {
     transform: translateY(-10px);
   }
 }
-@media only screen and (min-width: 960px)  {
+@media only screen and (min-width: 960px) {
   .loading {
     bottom: 60px;
   }
