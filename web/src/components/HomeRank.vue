@@ -7,7 +7,7 @@
     >
       <div class="rank-card-item">
         <a
-          :href="liveUrl + '/user/' + card.user_id"
+          :href="'https://juejin.cn/user/' + card.user_id"
           target="_blank"
           rel="noopener noreferrer"
           class="rank-card-item-avator"
@@ -40,7 +40,7 @@
         </a>
         <div class="rank-card-item-userinfo">
           <a
-            :href="liveUrl + '/user/' + card.user_id"
+            :href="'https://juejin.cn/user/' + card.user_id"
             target="_blank"
             rel="noopener noreferrer"
           >
