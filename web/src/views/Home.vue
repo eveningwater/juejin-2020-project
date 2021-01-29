@@ -2,6 +2,7 @@
   <div class="home">
     <Header />
     <HomeCountDown />
+    <MainLive />
     <HomeSign />
     <div>
       <HomeRankVote />
@@ -25,6 +26,7 @@ import HomeRankVote from "../components/HomeRankVote.vue";
 import HomeSearch, { emitter } from "../components/HomeSearch.vue";
 import HomeRankButton from "../components/HomeRankButton.vue";
 import HomeRank from "../components/HomeRank.vue";
+import MainLive from "../components/MainLive.vue";
 import axios from "axios";
 import { onMounted, reactive, toRefs, nextTick } from "vue";
 import { debounce } from "../utils/debounceFunction";
@@ -43,6 +45,7 @@ export default {
     HomeSearch,
     HomeRankButton,
     HomeRank,
+    MainLive
   },
   setup() {
     const params = {
