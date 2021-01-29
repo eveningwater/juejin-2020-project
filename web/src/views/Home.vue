@@ -26,7 +26,7 @@ import HomeSearch, { emitter } from "../components/HomeSearch.vue";
 import HomeRankButton from "../components/HomeRankButton.vue";
 import HomeRank from "../components/HomeRank.vue";
 import axios from "axios";
-import { onMounted, reactive, toRefs, nextTick } from "vue";
+import { onMounted, reactive, toRefs, nextTick,watch } from "vue";
 import { debounce } from "../utils/debounceFunction";
 interface SearchParams {
   'annual_id'?: string;
@@ -58,7 +58,12 @@ export default {
     const onSearchResult = (params: SearchParams) => {
       axios.post("http://localhost:8081/list", params).then((res) => {
         if (res.data.code === 200) {
-          state.listData = res.data.data;
+          if(!res.data.data.length)return;
+          if(params.keyword){
+            state.listData = res.data.data;
+          }else{
+            state.listData = state.listData.concat(res.data.data);
+          }
         }
       });
     };
