@@ -172,7 +172,7 @@
     .header-screen {
         width: 402px;
         height: 283.5px;
-        left: 565.5px;
+        left: 547.5px;
         top: 18.5px;
     }
     .header-cascade {
@@ -225,7 +225,7 @@
         width: 62px;
         height: 62px;
         left: 520px;
-        top: 320px;
+        top: 300px;
     }
     .header-coffee{
         left: 820px;

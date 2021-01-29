@@ -1,7 +1,9 @@
 <template>
-  <div class="wrapper">
-    <div class="container">
-      <router-view />
+  <div class="background">
+    <div class="wrapper">
+      <div class="container">
+        <router-view />
+      </div>
     </div>
     <Footer />
   </div>
@@ -12,7 +14,7 @@ import { useStore } from "vuex";
 import Footer from "./components/Footer.vue";
 export default {
   components: {
-    Footer,
+    Footer
   },
   setup() {
     const store = useStore();
@@ -20,10 +22,10 @@ export default {
       .get("http://localhost:8081/user", {
         params: {
           aid: 2608,
-          'not_self': 0,
-        },
+          "not_self": 0
+        }
       })
-      .then((res) => {
+      .then(res => {
         if (!res.data.data) {
           store.dispatch("setLoginState", false);
         } else {
@@ -31,7 +33,7 @@ export default {
         }
       });
     return {};
-  },
+  }
 };
 </script>
 <style lang="less">
@@ -40,6 +42,7 @@ export default {
   padding: 0;
   outline: none;
   box-sizing: border-box;
+  user-select: none;
 }
 ul,
 li {
@@ -63,27 +66,28 @@ body {
     line-height: 1.15;
     margin: 0;
   }
-  height: 100%;
   .app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    min-height: 100vh;
-    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANAgMAAAAPhQzvAAAADFBMVEVfV/ZUTPRVTfRLQ/L3YHYbAAAAGUlEQVQI12NgYGFgwCA4YKzQuVMdUMQwCABBYAIAV5t6PAAAAABJRU5ErkJggg==");
-    background-size: 6.5px 6.5px;
-    .wrapper {
+    .background {
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding-top: 32.5px;
-      .container {
-        position: relative;
-        width: 345px;
+      height: 100%;
+      position: relative;
+      min-height: 100vh;
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANAgMAAAAPhQzvAAAADFBMVEVfV/ZUTPRVTfRLQ/L3YHYbAAAAGUlEQVQI12NgYGFgwCA4YKzQuVMdUMQwCABBYAIAV5t6PAAAAABJRU5ErkJggg==");
+      background-size: 6.5px 6.5px;
+      .wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 32.5px;
+        .container {
+          position: relative;
+          width: 345px;
+        }
       }
     }
   }
@@ -91,9 +95,11 @@ body {
 @media only screen and (min-width: 960px) {
   body {
     .app {
-      .wrapper {
-        .container {
-          width: 960px;
+      .background {
+        .wrapper {
+          .container {
+            width: 960px;
+          }
         }
       }
     }

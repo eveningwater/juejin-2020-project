@@ -1,20 +1,18 @@
 <template>
-  <div class="home">
-    <Header />
-    <HomeCountDown />
-    <MainLive />
-    <HomeSign />
-    <div>
-      <HomeRankVote />
-      <HomeSearch />
-      <HomeRankButton />
-      <HomeRank :listData="listData" />
-    </div>
-    <div id="loading" class="loading" :style="{ opacity: LoadingNum }">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-    </div>
+  <Header />
+  <HomeCountDown />
+  <MainLive />
+  <HomeSign />
+  <div>
+    <HomeRankVote />
+    <HomeSearch />
+    <HomeRankButton />
+    <HomeRank :listData="listData" />
+  </div>
+  <div id="loading" class="loading" :style="{ opacity: LoadingNum }">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
   </div>
 </template>
 
@@ -71,14 +69,18 @@ export default {
       params.keyword = value;
       params.cursor = "0";
       state.listData = [];
-      onSearchResult(params);
+      nextTick(() => {
+        onSearchResult(params);
+      });
     });
     emitter.on("on-tab-change", (value) => {
       params.cursor = "0";
       params.keyword = "";
       params["list_type"] = value;
       state.listData = [];
-      onSearchResult(params);
+      nextTick(() => {
+        onSearchResult(params);
+      });
     });
     const showLoading = () => {
       state.LoadingNum = 1;
@@ -92,10 +94,10 @@ export default {
     };
     const route = useRoute();
     const scrollHandler = () => {
-      if(route.path !== "/")return;
+      if (route.path !== "/") return;
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement || document.body;
-      if (scrollTop + clientHeight >= scrollHeight - 5) {
+      if (scrollTop + clientHeight >= scrollHeight - 65) {
         showLoading();
       }
     };

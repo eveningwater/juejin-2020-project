@@ -22,12 +22,7 @@
                     'margin-top': isApp ? '7px' : '11px',
                     'margin-bottom': '0px',
                     height: isApp ? '117px' : '153.5px',
-                    'background-image':
-                      'url(' +
-                      require('../assets/avatar_background_' +
-                        (index + 1) +
-                        '.png') +
-                      ')',
+                    'background-image':'url(' + require('../assets/avatar_background_' + card.rank +'.png') +')',
                   }
                 : {
                     'background-image':
@@ -172,6 +167,7 @@ export default {
   flex-direction: column;
   position: relative;
   margin-bottom: 25px;
+  min-height: 100vh;
   .rank-card {
     width: 100%;
     background-repeat: no-repeat;
