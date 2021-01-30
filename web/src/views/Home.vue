@@ -25,7 +25,8 @@ import HomeSearch, { emitter } from "../components/HomeSearch.vue";
 import HomeRankButton from "../components/HomeRankButton.vue";
 import HomeRank from "../components/HomeRank.vue";
 import MainLive from "../components/MainLive.vue";
-import axios from "axios";
+import { AxiosResponse } from "axios";
+import  requestInstance from '../api/requestInstance';
 import { onMounted, reactive, toRefs, nextTick } from "vue";
 import { debounce } from "../utils/debounceFunction";
 import { useRoute } from "vue-router";
@@ -57,8 +58,9 @@ export default {
       listData: [],
       LoadingNum: 0,
     });
+    const request = requestInstance();
     const onSearchResult = (params: SearchParams) => {
-      axios.post("http://localhost:8081/list", params).then((res) => {
+      request.post("/list", params).then((res:AxiosResponse) => {
         if (res.data.code === 200) {
           if (!res.data.data.length) return;
           state.listData = state.listData.concat(res.data.data);

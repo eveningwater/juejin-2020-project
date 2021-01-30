@@ -9,31 +9,27 @@
   </div>
 </template>
 <script lang="ts">
-import axios from "axios";
 import { useStore } from "vuex";
 import Footer from "./components/Footer.vue";
+import requestInstance from "./api/requestInstance";
+import { AxiosResponse } from "axios";
 export default {
   components: {
-    Footer
+    Footer,
   },
   setup() {
     const store = useStore();
-    axios
-      .get("http://localhost:8081/user", {
-        params: {
-          aid: 2608,
-          "not_self": 0
-        }
+    const request = requestInstance();
+    request
+      .get("/user", {
+        aid: 2608,
+        "not_self": 0,
       })
-      .then(res => {
-        if (!res.data.data) {
-          store.dispatch("setLoginState", false);
-        } else {
-          store.dispatch("setLoginState", true);
-        }
+      .then((res:AxiosResponse) => {
+        store.dispatch("setLoginState", !res.data.data);
       });
     return {};
-  }
+  },
 };
 </script>
 <style lang="less">

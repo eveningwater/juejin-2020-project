@@ -27,7 +27,8 @@
 <script lang="ts">
 import { reactive, toRefs, watchEffect, computed } from "vue";
 import { useStore } from "vuex";
-import axios from "axios";
+import { AxiosResponse } from "axios";
+import  requestInstance from '../api/requestInstance';
 export default {
   setup() {
     const state = reactive({
@@ -40,12 +41,13 @@ export default {
         'annual_user_info': null,
       },
     });
-    axios
-      .post("http://localhost:8081/info", {
+    const request = requestInstance();
+    request
+      .post("/info", {
         'annual_id': "2020",
         'app_id': 2608,
       })
-      .then((res) => {
+      .then((res:AxiosResponse) => {
         if (res.data.code === 200) {
           state.infoData = res.data.data;
           state.infoData.recently_user.reverse();
