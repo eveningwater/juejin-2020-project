@@ -1,0 +1,56 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@for $i from 0 to 101 {
+    .w-#{$i}-p {
+        width: percentage(math.div($i,100));
+    }
+    .h-#{$i}-p {
+        height: percentage(math.div($i,100));
+    }
+    .min-w-#{$i}-vw {
+        min-width: $i + vw;
+    } 
+    .min-h-#{$i}-vh {
+        min-height: $i + vh;
+    }
+    .max-w-#{$i}-vw {
+        max-width: $i + vw;
+    } 
+    .max-h-#{$i}-vh {
+        max-height: $i + vh;
+    }    
+}
+@for $i from 0 to 2001 {
+    .m-#{$i} {
+        @if $i == 0 {
+            #{$margin}:$i;
+        }@else {
+            #{$margin}:$i + px;
+        }
+    }
+    .p-#{$i} {
+        @if $i == 0 {
+            #{$padding}:$i;
+        }@else {
+            #{$padding}:$i + px;
+        }
+    }
+    @each $dir in $direction {
+        $first:string.slice($dir,0,1);
+        .m#{$first + $i} {
+            @if $i == 0 {
+                #{$margin + '-' + $dir }:$i;
+            }@else {
+                #{$margin + '-' + $dir }:$i + px;
+            }
+        }
+        .p#{$first + $i} {
+            @if $i == 0 {
+                #{$padding + '-' + $dir }:$i;
+            }@else {
+                #{$padding + '-' + $dir }:$i + px;
+            }
+        }
+    }
+}
