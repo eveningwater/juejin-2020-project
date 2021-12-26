@@ -1,0 +1,13 @@
+@use "sass:list";
+$baseSelector:jw-;
+$mediaMinWidth:960 + px;
+$direction:left,top,bottom,right;
+$margin:margin;
+$padding:padding;
+$center:center;
+$display:flex,block,inline,none,table;
+$position:relative,fixed,absolute,sticky,static;
+$flex-layout:flex-start,flex-end,$center;
+$flex-direction:row,row-reverse,column,column-reverse;
+$text-align:list.nth($direction,1),$center,list.nth($direction,length($direction));
+$font-family:nunito_for_arco,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;

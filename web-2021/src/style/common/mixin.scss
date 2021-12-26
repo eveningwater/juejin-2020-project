@@ -1,0 +1,14 @@
+@mixin lh($number:0,$unit) {
+    $value:$number;
+    @if $unit {
+        $value:$number + $unit;
+    }
+    line-height: $value;
+}
+@mixin w($number,$unit){
+    $value:$number;
+    @if $unit {
+        $value:$number + $unit;
+    }
+    width: $value;
+}

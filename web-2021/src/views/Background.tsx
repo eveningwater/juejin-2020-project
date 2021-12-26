@@ -1,6 +1,13 @@
-import "./background.scss";
+import Header from "../components/Header";
+import "../style/views/background.scss";
 export default function Background(){
     return (
-        <div className="jw-background w-100-p min-h-100-vh"></div>
+        <div className="jw-background">
+            <div className="jw-wrapper">
+                <div className="jw-container">
+                    <Header></Header>
+                </div>
+            </div>
+        </div>
     )
 }

@@ -1,0 +1,6 @@
+.#{$baseSelector}header {
+    @extend .w-960,.min-h-591;
+    &-image {
+        @extend .w-100-p,.el-display-block;
+    }
+}

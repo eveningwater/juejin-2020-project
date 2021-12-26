@@ -1,0 +1,5 @@
+.flex-center {
+    @extend .el-display-flex;
+    @extend .el-jc-center;
+    @extend .el-ai-center;
+}

@@ -1,0 +1,15 @@
+.#{$baseSelector}background {
+    @extend .w-100-p,.min-h-100-vh,.h-100-p; 
+    background: $backgroundBgColor;
+    .#{$baseSelector}wrapper{
+        @extend .w-100-p,.flex-center,.el-fd-column;
+        .#{$baseSelector}container {
+            @extend .el-pos-r,.w-100-p;
+            @media only screen and (min-width:$mediaMinWidth) {
+               // cannot use @extend syntax across media queries
+               // use the mixin syntax
+               & { @include w(960,px); }
+            }
+        }  
+    }
+}

@@ -1,0 +1,6 @@
+/*
+* 截取属性字符
+*/
+@function propSlice($prop,$start,$end){
+    @return string.unquote(string.slice(string.quote($prop),$start,$end))
+}

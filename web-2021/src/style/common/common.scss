@@ -1,0 +1,126 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@import "./function.scss";
+@import "./extend.scss";
+@import "./mixin.scss";
+@for $i from 0 to 101 {
+    .w-#{$i}-p {
+        width: percentage(math.div($i,100));
+    }
+    .h-#{$i}-p {
+        height: percentage(math.div($i,100));
+    }
+    .min-w-#{$i}-vw {
+        min-width: $i + vw;
+    } 
+    .min-h-#{$i}-vh {
+        min-height: $i + vh;
+    }
+    .max-w-#{$i}-vw {
+        max-width: $i + vw;
+    } 
+    .max-h-#{$i}-vh {
+        max-height: $i + vh;
+    }    
+}
+@for $i from 0 to 2001 {
+    .m-#{$i} {
+        @if $i == 0 {
+            #{$margin}:$i;
+        }@else {
+            #{$margin}:$i + px;
+        }
+    }
+    .p-#{$i} {
+        @if $i == 0 {
+            #{$padding}:$i;
+        }@else {
+            #{$padding}:$i + px;
+        }
+    }
+    .lh-#{$i} {
+        line-height: $i + px;
+    }
+    .w-#{$i} {
+        width:$i + px;
+    }
+    .min-w-#{$i} {
+        min-width: $i + px;
+    } 
+    .min-h-#{$i} {
+        min-height: $i + px;
+    }
+    @each $dir in $direction {
+        $first:propSlice($dir,1,1);
+        .m#{$first + $i} {
+            @if $i == 0 {
+                #{$margin + '-' + $dir }:$i;
+            }@else {
+                #{$margin + '-' + $dir }:$i + px;
+            }
+        }
+        .p#{$first + $i} {
+            @if $i == 0 {
+                #{$padding + '-' + $dir }:$i;
+            }@else {
+                #{$padding + '-' + $dir }:$i + px;
+            }
+        }
+    }
+    /*
+    * 四个方向上的偏移
+    */
+    @each $value in $direction {
+        .el-#{$value}-#{$i} {
+            #{$value}: $i + px;
+        }
+    }
+}
+@each $value in $display {
+    $prop:display;
+    .el-#{$prop}-#{$value} {
+        display: $value;
+    }
+}
+@each $value in $flex-layout {
+    $prop-hor:justify-content;
+    $prop-ver:align-items;
+    $prop-hor-sel:propSlice($prop-hor,1,1) + propSlice($prop-hor,-7,-7);
+    $prop-ver-sel:propSlice($prop-ver,1,1) + propSlice($prop-ver,-5,-5);
+    .el-#{$prop-hor-sel}-#{$value} {
+        #{$prop-hor}: $value;
+    }
+    .el-#{$prop-ver-sel}-#{$value} {
+        #{$prop-ver}: $value;
+    }
+}
+@each $value in $flex-direction {
+    $prop:flex-direction;
+    $prop-sel:propSlice($prop,1,1) + propSlice($prop,6,6);
+    .el-#{$prop-sel}-#{$value} {
+        #{$prop}: $value;
+    }
+}
+@each $value in $flex-direction {
+    $prop:flex-direction;
+    $prop-sel:propSlice($prop,1,1) + propSlice($prop,6,6);
+    .el-#{$prop-sel}-#{$value} {
+        #{$prop}: $value;
+    }
+}
+@each $value in $text-align {
+    $prop:text-align;
+    $prop-sel:propSlice($prop,1,4);
+    .el-#{$prop-sel}-#{$value} {
+        #{$prop}: $value;
+    }
+}
+@each $value in $position {
+    $prop:position;
+    $prop-sel:propSlice($prop,1,3) + '-' + propSlice($value,1,1);
+    .el-#{$prop-sel} {
+        #{$prop}: $value;
+    }
+}
+

@@ -1,1 +1,6 @@
-@import "./common.scss";
+body,html {
+    //Because interpolation removes quotation marks from quoted strings, 
+    // it may be necessary to wrap them in the `meta.inspect()/inspect()` function to preserve their quotes.
+    font-family: #{inspect($font-family)};
+    @include lh(1.5,null);
+}
