@@ -1,0 +1,15 @@
+.#{$baseSelector}rank-info-link {
+    @extend .flex-center,.el-pos-a,.el-top-0,.el-cursor-pointer,.bg-contain,.w-16-vw;
+    height: 14.4vw;
+    right: 3.2vw;
+    background-image: url("../../assets/info_button.png");
+    @media only screen and (min-width:$mediaMinWidth) {
+        // cannot use @extend syntax across media queries
+        // use the mixin syntax
+        & { 
+            @include w(90,px);
+            @include h(81,px);
+            @include direction(right,35,px); 
+        }
+     }
+}

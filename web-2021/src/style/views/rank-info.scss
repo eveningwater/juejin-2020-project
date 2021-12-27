@@ -1,0 +1,12 @@
+.#{$baseSelector}info-link {
+    @extend .el-pos-a,.el-left-315,.el-top-380,.fw-500,.fs-20,.lh-28,.el-text-center,.zi-100,.color-white,.link-text-none;
+    &-text {
+        @extend .bdb-2,.bdb-solid;
+        border: {
+            color:$white;
+        }
+    }
+    &-right-icon {
+        @extend .el-top-point-1-em,.h-point-8-em,.el-pos-r,.pl-6,.bd-none;
+    }
+}

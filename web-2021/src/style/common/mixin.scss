@@ -12,3 +12,17 @@
     }
     width: $value;
 }
+@mixin h($number,$unit){
+    $value:$number;
+    @if $unit {
+        $value:$number + $unit;
+    }
+    height: $value;
+}
+@mixin direction($dir,$number:0,$unit) {
+    $value:$number;
+    @if $unit {
+        $value:$number + $unit;
+    }
+    #{$dir}:$value;
+}
