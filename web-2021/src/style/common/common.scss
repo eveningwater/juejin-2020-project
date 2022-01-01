@@ -33,7 +33,7 @@
         font-size: $i + px;
     }    
 }
-@for $i from 0 to 2001 {
+@for $i from 0 to 101 {
     .m-#{$i} {
         @if $i == 0 {
             #{$margin}:$i;

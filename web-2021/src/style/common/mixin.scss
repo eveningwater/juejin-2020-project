@@ -1,3 +1,4 @@
+$propList:line-height,width,height,font-size;
 @mixin lh($number:0,$unit) {
     $value:$number;
     @if $unit {
@@ -18,6 +19,13 @@
         $value:$number + $unit;
     }
     height: $value;
+}
+@mixin fs($number,$unit){
+    $value:$number;
+    @if $unit {
+        $value:$number + $unit;
+    }
+    font-size: $value;
 }
 @mixin direction($dir,$number:0,$unit) {
     $value:$number;

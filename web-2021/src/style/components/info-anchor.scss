@@ -1,7 +1,7 @@
 .#{$baseSelector}rank-info-link {
     @extend .flex-center,.el-pos-a,.el-top-0,.el-cursor-pointer,.bg-contain,.w-16-vw;
-    height: 14.4vw;
-    right: 3.2vw;
+    @include h(14.4,vw);
+    @include direction(right,3.2,vw);
     background-image: url("../../assets/info_button.png");
     @media only screen and (min-width:$mediaMinWidth) {
         // cannot use @extend syntax across media queries
